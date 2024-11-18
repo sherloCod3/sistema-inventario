@@ -44,6 +44,12 @@ logs/
 .DS_Store
 .env
 .env.local
+.env.development
 .env.development.local
 .env.test.local
 .env.production.local
+
+#Others
+todo-list
+todo-list.txt
+melhorias

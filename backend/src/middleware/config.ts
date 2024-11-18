@@ -1,4 +1,3 @@
-// src/middleware/config.ts
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -6,54 +5,49 @@ import helmet from 'helmet';
 import { logger } from '../config/logger';
 
 export const configureMiddleware = (app: express.Application) => {
-  // Logging middleware
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
   }
 
-  // Parse JSON bodies
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // Configure CORS
-  const allowedOrigins = process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000'];
-  
-  const corsOptions = {
-    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-      // Permitir requisições sem origin (como mobile apps ou curl)
-      if (!origin) {
-        return callback(null, true);
-      }
-      
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'http://inventoryupa.ip-ddns.com:3000',
+    'http://inventoryupa.ip-ddns.com:5000'
+  ];
+
+  app.use(cors({
+    origin: allowedOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['Content-Range', 'X-Content-Range'],
-    maxAge: 600 // 10 minutos
-  };
-
-  app.use(cors(corsOptions));
-
-  // Security middleware
-  app.use(helmet({
-    crossOriginResourcePolicy: {
-      policy: 'cross-origin'
-    }
+    exposedHeaders: ['Content-Range', 'X-Content-Range', 'Access-Control-Allow-Origin'],
+    maxAge: 86400
   }));
 
-  // Error handling para CORS e outros erros de middleware
+  // Headers adicionais de CORS
+  app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin && allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
+
+  app.use(helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    crossOriginEmbedderPolicy: false
+  }));
+
   app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (err.message === 'Not allowed by CORS') {
       logger.warn(`CORS blocked request from origin: ${req.headers.origin}`);
-      res.status(403).json({
-        message: 'Não autorizado para acessar este recurso'
-      });
+      res.status(403).json({ message: 'Não autorizado para acessar este recurso' });
     } else {
       next(err);
     }
