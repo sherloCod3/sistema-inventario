@@ -6,6 +6,8 @@ import connectDB from './config/database';
 import { logger } from './config/logger';
 import authRoutes from './routes/auth';
 import inventoryRouter from './routes/inventory'; // 👈 Nome atualizado
+import { rateLimiter, timeoutMiddleware, haltOnTimedout, helmetConfig } from './middleware/security';
+import { configureMiddleware } from './config/config';
 
 // Carrega as variáveis de ambiente
 dotenv.config();
@@ -32,6 +34,15 @@ app.use(cors({
   },
   credentials: true
 }));
+
+configureMiddleware(app);
+
+// Middleware de segurança
+app.use(helmetConfig);
+app.use(rateLimiter);
+app.use(timeoutMiddleware);
+app.use(haltOnTimedout);
+
 
 // Middleware para parser JSON
 app.use(express.json());
@@ -67,7 +78,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 // Porta do servidor
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
 // Função para iniciar o servidor
 const startServer = async () => {
@@ -76,8 +87,10 @@ const startServer = async () => {
     await connectDB();
     
     // Inicia o servidor
-    app.listen(PORT, () => {
-      logger.info(`✅ Servidor rodando na porta ${PORT}`);
+    const HOST = '0.0.0.0';
+    app.listen(PORT, HOST, () => {
+      logger.info(`✅ Servidor rodando em http://${HOST}:${PORT}`);
+      //logger.info(`✅ Servidor rodando na porta ${PORT}`);
       logger.info(`📑 Ambiente: ${process.env.NODE_ENV}`);
       logger.info(`🌐 CORS habilitado para: ${allowedOrigins.join(', ')}`);
     });

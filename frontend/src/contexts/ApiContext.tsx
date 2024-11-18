@@ -28,7 +28,7 @@ export const ApiProvider: React.FC<ApiProviderProps> = ({ children }) => {
 
   const baseUrls = {
     local: 'http://localhost:5000/api',
-    ddns: 'http://inventoryupa.ip-ddns.com:5000/api'
+    ddns: 'http://inventoryupa.freeddns.org:5000/api'
   };
 
   const toggleEnvironment = () => {

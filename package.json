@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "connect-timeout": "^1.9.0",
+    "express-rate-limit": "^7.4.1"
+  },
+  "devDependencies": {
+    "@types/connect-timeout": "^0.0.39"
+  }
+}

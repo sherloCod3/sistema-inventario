@@ -12,6 +12,7 @@
     "validate:db": "node scripts/validateConnection.js",
     "test:mongo": "node scripts/testMongoDBConnection.js",
     "init-db": "ts-node scripts/initDb.ts",
+    "postinstall": "npm run build",
     "init-admin": "ts-node scripts/initAdmin.ts"
   },
   "dependencies": {
