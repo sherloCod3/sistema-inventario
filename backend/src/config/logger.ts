@@ -1,3 +1,4 @@
+// src/config/logger.ts
 import winston from 'winston';
 
 const logger = winston.createLogger({
@@ -20,5 +21,8 @@ if (process.env.NODE_ENV !== 'production') {
     )
   }));
 }
+
+// Adicionar alias para warning
+logger.warning = logger.warn;
 
 export { logger };

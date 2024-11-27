@@ -9,4 +9,7 @@ const router = express_1.default.Router();
 // Rotas públicas (por enquanto)
 router.get('/', inventoryControllers_1.getInventory);
 router.post('/', inventoryControllers_1.createInventory);
+router.put('/:id', inventoryControllers_1.updateInventory);
+router.delete('/:id', inventoryControllers_1.deleteInventory);
 exports.default = router;
+//# sourceMappingURL=inventory.js.map

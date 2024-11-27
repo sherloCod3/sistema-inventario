@@ -30,7 +30,7 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "start": "HOST=0.0.0.0 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --config jest.config.js",
     "test:watch": "jest --config jest.config.js --watch",
@@ -72,5 +72,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "resolve-url-loader": "^5.0.0",
     "ts-jest": "^29.1.1"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

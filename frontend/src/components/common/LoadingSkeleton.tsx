@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react'; // Adicionar useState se usar a versão com estado
 import { Card } from '../common/Card';
+import { EnvironmentManager } from '../EnvironmentManager';
+
+const defaultEnvironments = [
+  { id: 'local', name: 'Local' },
+  { id: 'staging', name: 'Staging' },
+  { id: 'production', name: 'Production' }
+];
 
 // Componente de fallback para carregamento
 export const InventoryTableSkeleton: React.FC = () => {
+  const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
+
   return (
-    <Card>
+      <Card>
       <div className="flex justify-between items-center mb-4">
         <div className="h-6 w-32 bg-gray-200 rounded animate-pulse" />
         <div className="h-10 w-24 bg-gray-200 rounded animate-pulse" />
       </div>
-
+      <EnvironmentManager 
+                environments={defaultEnvironments}
+                selectedEnvironment={selectedEnvironment}
+                onEnvironmentChange={setSelectedEnvironment}
+            />
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
