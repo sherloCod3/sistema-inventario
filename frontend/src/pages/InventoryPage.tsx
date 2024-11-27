@@ -10,6 +10,7 @@ import { InventoryPageSkeleton } from '../components/skeletons/LoadingSkeletons'
 import { InventoryItem, InventoryFormData } from '../types/inventory';
 import { useToast } from '../contexts/ToastContext';
 import { useInventory } from '../hooks/useInventory';
+import ServiceStatusMonitor from '../components/monitoring/ServiceStatus';
 
 const InventoryPage: React.FC = () => {
   const { items, loading, error, addItem, updateItem, deleteItem } = useInventory();
@@ -103,6 +104,10 @@ const InventoryPage: React.FC = () => {
           onEditItem={handleOpenModal}
           onDeleteItem={handleDeleteClick}
         />
+        <div>
+          <ServiceStatusMonitor />
+          
+        </div>
       </main>
 
       <InventoryModal

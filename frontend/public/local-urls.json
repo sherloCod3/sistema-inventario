@@ -1,0 +1,12 @@
+{
+  "timestamp": "2024-11-20T02:30:08.208Z",
+  "urls": {
+    "frontend": null,
+    "backend": null,
+    "ngrok": {
+      "frontend": "https://e435-138-186-82-8.ngrok-free.app",
+      "backend": "https://5992-138-186-82-8.ngrok-free.app"
+    },
+    "ddns": "http://upalpinventorysystem.duckdns.org"
+  }
+}

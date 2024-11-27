@@ -1,9 +1,18 @@
 {
   "dependencies": {
+    "@types/node": "^22.9.1",
+    "axios": "^1.7.7",
+    "chalk": "^5.3.0",
     "connect-timeout": "^1.9.0",
-    "express-rate-limit": "^7.4.1"
+    "dotenv": "^16.4.5",
+    "events": "^3.3.0",
+    "express-rate-limit": "^7.4.1",
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@types/connect-timeout": "^0.0.39"
+    "@types/connect-timeout": "^0.0.39",
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2"
   }
 }
