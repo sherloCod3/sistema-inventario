@@ -135,6 +135,7 @@ const InventoryModal: React.FC<InventoryModalProps> = ({
                             <option value="Computador">Computador</option>
                             <option value="Monitor">Monitor</option>
                             <option value="Telefone">Telefone</option>
+                            <option value="Impressora">Impressora</option> // Adicionado Impressora
                         </Select>
 
                         <div>

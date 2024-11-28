@@ -1,5 +1,5 @@
 // src/types/inventory.ts
-export type InventoryType = 'Computador' | 'Monitor' | 'Telefone';
+export type InventoryType = 'Computador' | 'Monitor' | 'Telefone' | 'Impressora'; //Adicionado Impressora
 export type InventoryStatus = 'Ativo' | 'Em Manutenção' | 'Inativo';
 export type InventoryCondition = 'Ótimo' | 'Bom' | 'Regular' | 'Ruim';
 export type SortOrder = 'asc' | 'desc';
@@ -8,7 +8,7 @@ export interface InventoryFormData {
     type: InventoryType;
     sector: string;
     brand: string;
-    model: string;      // Mantemos model no form data para compatibilidade com UI existente
+    model: string;
     status: InventoryStatus;
     condition: InventoryCondition;
 }

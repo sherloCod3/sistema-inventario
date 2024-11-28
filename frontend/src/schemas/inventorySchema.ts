@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 // Enums para valores permitidos
-const ItemType = z.enum(['Computador', 'Monitor', 'Telefone']);
+const ItemType = z.enum(['Computador', 'Monitor', 'Telefone', 'Impressora']); // Adicionado Impressora
 const ItemStatus = z.enum(['Ativo', 'Em Manutenção', 'Inativo']);
 const ItemCondition = z.enum(['Ótimo', 'Bom', 'Regular', 'Ruim']);
 
