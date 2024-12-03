@@ -9,6 +9,7 @@ const allowedOrigins = [
   /\.ngrok\.io$/,
   /\.freeddns\.org$/,
   /\.duckdns\.org$/,
+  /\.netlify\.app$/,
 
   process.env.DDNS_URL || 'http://inventoryupa.freeddns.org:3000',
   process.env.FRONTEND_URL || '' // Fallback para string vazia se não configurado
